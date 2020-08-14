@@ -1,0 +1,73 @@
+title: Consumption control. Starting default configuration by Oracle.
+description: Create a budget, a notification topic and an event rule. Mail gets sent in case of hitting the configured budget alert rule. 
+schemaVersion: 1.1.0
+version: "20200814"
+locale: "en"
+
+variableGroups:
+  - title: "General Configuration"
+    variables:
+    - compartment_ocid
+    - tenancy_ocid
+    - region
+    visible: false
+  - title: "Static Configuration"
+    variables:
+    - budget_reset_period
+    - budget_description
+    - budget_display_name
+    - budget_target_type
+    - alert_rule_description
+    - alert_rule_display_name
+    - notification_topic_name
+    - notification_topic_description
+    - subscription_protocol
+    - rule_actions_actions_action_type
+    - rule_actions_actions_is_enabled
+    - rule_actions_actions_description
+    - rule_display_name
+    - rule_is_enabled
+    - rule_description
+    visible: false
+  - title: "Required Configuration"
+    variables:
+    - budget_amount
+    - subscription_endpoint
+    visible: true  
+  - title: "Optional Configuration"
+    variables:
+    - alert_rule_threshold
+    - alert_rule_threshold_type
+    - alert_rule_type
+    visible: true
+
+variables:
+  budget_amount:
+    type: number
+    title: "Budget"
+    description: "Amount in €. Threshold to be checked"
+    required: true
+  
+  alert_rule_threshold:
+    type: number
+    title: Threshold
+    description: Whole number or decimal value indicating the threshold for triggering the alert
+    required: false
+
+  alert_rule_threshold_type:
+    type: string
+    title: Type of threshold
+    description: Possible values are ABSOLUTE or PERCENTAGE
+    required: false
+
+  alert_rule_type:
+    type: string
+    title: Type of alert
+    description: Possible values are ACTUAL or FORECAST
+    required: false
+
+  subscription_endpoint:
+    type: string
+    title: Email
+    description: Destination adress to which triggered alerts are going to be sent
+    required: true
